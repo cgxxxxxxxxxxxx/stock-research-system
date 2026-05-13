@@ -1,0 +1,224 @@
+# 系统配置
+system:
+  name: "股票深度研究报告系统"
+  version: "1.0"
+  log_level: "INFO"
+  log_file: "logs/system.log"
+
+# 数据源配置
+data_sources:
+  # 本地数据路径
+  local_raw_path: "D:\\Chen_Guoxi\\知识库\\raw\\"
+  knowledge_base_path: "D:\\Chen_Guoxi\\知识库\\"
+  cache_db: "data/cache.db"
+  report_output_path: "D:\\Chen_Guoxi\\知识库\\reports\\"
+  
+  # 数据连接器配置文件
+  connectors_config: "config/data_connectors.json"
+  
+  # AkShare配置（A股核心数据源）
+  akshare:
+    enabled: true
+    timeout: 30
+    retry_times: 3
+    description: "免费金融数据接口，覆盖A股/港股/美股"
+    
+  # yfinance配置（美股）
+  yfinance:
+    enabled: true
+    timeout: 30
+    description: "Yahoo Finance数据，美股行情和财务摘要"
+    
+  # IR Asia配置（港股）
+  ir_asia:
+    enabled: true
+    base_url: "https://www.irasia.com"
+    description: "港股投资者材料最全平台"
+    
+  # SEC EDGAR配置（美股）
+  sec_edgar:
+    enabled: true
+    base_url: "https://www.sec.gov"
+    user_agent: "WorkBuddy Research System contact@example.com"
+    description: "美股官方披露系统"
+    
+  # 东方财富配置
+  eastmoney:
+    enabled: true
+    base_url: "https://data.eastmoney.com"
+    description: "A股/港股/美股实时行情和财务数据"
+    
+  # 巨潮资讯配置
+  cninfo:
+    enabled: true
+    base_url: "http://www.cninfo.com.cn"
+    description: "证监会指定披露平台，A股公告原文"
+    
+  # 港交所披露易配置
+  hkex_news:
+    enabled: true
+    base_url: "https://www.hkexnews.hk"
+    description: "港股官方披露平台"
+
+# 模块配置
+modules:
+  # 数据获取模块
+  data_fetch:
+    local_first: true              # 优先使用本地数据
+    cache_enabled: true            # 启用缓存
+    cache_expire_days: 7           # 缓存过期天数
+    
+  # 财务分析模块
+  financial_analysis:
+    default_period: "5y"           # 默认分析周期
+    benchmark_source: "行业平均"    # 基准数据源
+    include_trend: true            # 包含趋势分析
+    
+  # 估值建模模块
+  valuation:
+    dcf:
+      default_forecast_years: 5    # 默认预测期
+      default_growth_rate: 0.05    # 默认永续增长率
+      default_wacc: 0.10           # 默认WACC
+      sensitivity_enabled: true    # 启用敏感性分析
+      
+    comps:
+      default_peers_count: 5       # 默认可比公司数量
+      metrics: ["PE", "PB", "EV_EBITDA", "PEG"]
+      
+  # 行业分析模块
+  industry_analysis:
+    include_macro: true            # 包含宏观环境
+    include_policy: true           # 包含政策分析
+    include_cycle: true            # 包含周期分析
+    
+  # 竞争分析模块
+  competitive_analysis:
+    framework: "Porter五力"        # 分析框架
+    include_moat: true             # 包含护城河评估
+    
+  # 报告生成模块
+  report:
+    default_format: "markdown"
+    include_disclaimer: true       # 包含免责声明
+    include_methodology: true      # 包含方法论说明
+    chart_dpi: 300                 # 图表分辨率
+
+# 报告模板配置
+report_templates:
+  initiating_coverage:
+    name: "首发覆盖报告"
+    sections:
+      - name: "投资要点"
+        required: true
+        min_words: 300
+      - name: "公司概况"
+        required: true
+        min_words: 500
+      - name: "行业分析"
+        required: true
+        min_words: 800
+      - name: "财务分析"
+        required: true
+        min_words: 1000
+      - name: "估值分析"
+        required: true
+        min_words: 800
+      - name: "风险提示"
+        required: true
+        min_words: 300
+      - name: "投资建议"
+        required: true
+        min_words: 300
+    word_count_range: [6000, 10000]
+    
+  earnings_update:
+    name: "季报更新报告"
+    sections:
+      - name: "业绩概览"
+        required: true
+        min_words: 200
+      - name: "经营亮点"
+        required: true
+        min_words: 300
+      - name: "财务分析"
+        required: true
+        min_words: 500
+      - name: "盈利预测调整"
+        required: true
+        min_words: 300
+      - name: "估值更新"
+        required: true
+        min_words: 300
+      - name: "投资建议"
+        required: true
+        min_words: 200
+    word_count_range: [3000, 5000]
+
+# 模块依赖关系
+module_dependencies:
+  data_fetch: []
+  financial_analysis: ["data_fetch"]
+  valuation: ["financial_analysis"]
+  industry_analysis: ["data_fetch"]
+  competitive_analysis: ["industry_analysis"]
+  report_generation: ["financial_analysis", "valuation", "industry_analysis", "competitive_analysis"]
+
+# 可用模块列表
+available_modules:
+  - id: "data_fetch"
+    name: "数据获取"
+    description: "获取财务数据、行情数据、行业数据等"
+    category: "数据层"
+    
+  - id: "financial_analysis"
+    name: "财务分析"
+    description: "三大报表分析、财务指标计算、ROIC分析"
+    category: "分析层"
+    
+  - id: "valuation"
+    name: "估值建模"
+    description: "DCF估值、可比公司分析"
+    category: "分析层"
+    
+  - id: "industry_analysis"
+    name: "行业分析"
+    description: "行业规模、竞争格局、发展趋势"
+    category: "分析层"
+    
+  - id: "competitive_analysis"
+    name: "竞争分析"
+    description: "竞争格局、护城河评估、Porter五力"
+    category: "分析层"
+    
+  - id: "report_generation"
+    name: "报告生成"
+    description: "生成结构化研究报告"
+    category: "输出层"
+
+# 市场配置
+markets:
+  A股:
+    data_source: "akshare"
+    stock_code_pattern: "^\\d{6}$"
+    exchange_suffix:
+      - ".SH"  # 上海
+      - ".SZ"  # 深圳
+      
+  港股:
+    data_source: "ir_asia"
+    stock_code_pattern: "^\\d{5}$"
+    exchange_suffix: ".HK"
+    
+  美股:
+    data_source: "sec_edgar"
+    stock_code_pattern: "^[A-Z]{1,5}$"
+    exchange_suffix: ""
+
+# 日志配置
+logging:
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  datefmt: "%Y-%m-%d %H:%M:%S"
+  level: "INFO"
+  file: "logs/system.log"
+  console: true
