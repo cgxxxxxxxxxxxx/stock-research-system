@@ -1,0 +1,341 @@
+# 行业关键指标配置
+# 基于Claude Financial Services的competitive-analysis技能
+
+# 行业分类及其核心指标
+industries:
+  # 科技行业
+  SaaS:
+    name: 软件即服务
+    key_metrics:
+      - name: ARR
+        description: 年度经常性收入
+        unit: 美元
+      - name: NRR
+        description: 净收入留存率
+        unit: 百分比
+      - name: CAC Payback
+        description: 客户获取成本回收期
+        unit: 月
+      - name: LTV/CAC
+        description: 客户生命周期价值与获取成本比
+        unit: 比率
+      - name: Rule of 40
+        description: 增长率+利润率
+        unit: 百分比
+    benchmark_companies:
+      - Salesforce
+      - ServiceNow
+      - Workday
+
+  Payments:
+    name: 支付
+    key_metrics:
+      - name: GPV
+        description: 总支付量
+        unit: 美元
+      - name: Take Rate
+        description: 费率
+        unit: 百分比
+      - name: Attach Rate
+        description: 附加率
+        unit: 百分比
+      - name: Transaction Margin
+        description: 交易利润率
+        unit: 百分比
+    benchmark_companies:
+      - PayPal
+      - Stripe
+      - Square
+
+  Marketplaces:
+    name: 交易平台
+    key_metrics:
+      - name: GMV
+        description: 商品交易总额
+        unit: 美元
+      - name: Take Rate
+        description: 平台费率
+        unit: 百分比
+      - name: Buyer/Seller Ratio
+        description: 买卖双方比例
+        unit: 比率
+      - name: Repeat Rate
+        description: 复购率
+        unit: 百分比
+    benchmark_companies:
+      - Amazon
+      - Alibaba
+      - eBay
+
+  # 传统行业
+  Retail:
+    name: 零售
+    key_metrics:
+      - name: Same-store Sales
+        description: 同店销售增长
+        unit: 百分比
+      - name: Inventory Turns
+        description: 库存周转率
+        unit: 次数/年
+      - name: Sales per Sq Ft
+        description: 每平方英尺销售额
+        unit: 美元
+    benchmark_companies:
+      - Walmart
+      - Costco
+      - Target
+
+  Logistics:
+    name: 物流
+    key_metrics:
+      - name: Volume
+        description: 货运量
+        unit: 吨/件
+      - name: Cost per Unit
+        description: 单位成本
+        unit: 美元
+      - name: On-time Delivery %
+        description: 准时交付率
+        unit: 百分比
+      - name: Capacity Utilization
+        description: 产能利用率
+        unit: 百分比
+    benchmark_companies:
+      - FedEx
+      - UPS
+      - DHL
+
+  Manufacturing:
+    name: 制造业
+    key_metrics:
+      - name: Capacity Utilization
+        description: 产能利用率
+        unit: 百分比
+      - name: Inventory Turns
+        description: 库存周转率
+        unit: 次数/年
+      - name: Gross Margin
+        description: 毛利率
+        unit: 百分比
+      - name: ROIC
+        description: 投入资本回报率
+        unit: 百分比
+    benchmark_companies:
+      - 丰田
+      - 大众
+      - 通用电气
+
+  # 金融行业
+  Banking:
+    name: 银行
+    key_metrics:
+      - name: Net Interest Margin
+        description: 净息差
+        unit: 百分比
+      - name: Cost-to-Income Ratio
+        description: 成本收入比
+        unit: 百分比
+      - name: ROE
+        description: 净资产收益率
+        unit: 百分比
+      - name: NPL Ratio
+        description: 不良贷款率
+        unit: 百分比
+    benchmark_companies:
+      - 摩根大通
+      - 美国银行
+      - 花旗
+
+  Insurance:
+    name: 保险
+    key_metrics:
+      - name: Combined Ratio
+        description: 综合成本率
+        unit: 百分比
+      - name: Investment Yield
+        description: 投资收益率
+        unit: 百分比
+      - name: ROE
+        description: 净资产收益率
+        unit: 百分比
+    benchmark_companies:
+      - 伯克希尔哈撒韦
+      - 友邦保险
+      - 中国平安
+
+  # 中国特色行业
+  Chemical:
+    name: 化工
+    key_metrics:
+      - name: Capacity Utilization
+        description: 产能利用率
+        unit: 百分比
+      - name: Gross Margin
+        description: 毛利率
+        unit: 百分比
+      - name: ROIC
+        description: 投入资本回报率
+        unit: 百分比
+      - name: EBITDA Margin
+        description: EBITDA利润率
+        unit: 百分比
+    benchmark_companies:
+      - 万华化学
+      - BASF
+      - 陶氏化学
+
+  RealEstate:
+    name: 房地产
+    key_metrics:
+      - name: Contracted Sales
+        description: 合同销售额
+        unit: 元
+      - name: Land Bank
+        description: 土地储备
+        unit: 平方米
+      - name: Debt-to-Asset Ratio
+        description: 资产负债率
+        unit: 百分比
+      - name: Cash-to-Short-term Debt
+        description: 现金短债比
+        unit: 比率
+    benchmark_companies:
+      - 万科
+      - 碧桂园
+      - 恒大
+
+  NewEnergy:
+    name: 新能源
+    key_metrics:
+      - name: Capacity
+        description: 产能
+        unit: GW
+      - name: Utilization Rate
+        description: 利用率
+        unit: 百分比
+      - name: Cost per Watt
+        description: 每瓦成本
+        unit: 美元
+      - name: Gross Margin
+        description: 毛利率
+        unit: 百分比
+    benchmark_companies:
+      - 宁德时代
+      - 比亚迪
+      - 特斯拉
+
+# 护城河评估框架（基于Claude）
+moat_categories:
+  network_effects:
+    name: 网络效应
+    description: 用户/供应商飞轮强度；跨边vs同边
+    indicators:
+      - 用户增长与价值提升的相关性
+      - 跨边网络效应强度
+      - 同边网络效应强度
+    rating_criteria:
+      strong: 用户增长显著提升平台价值，双边飞轮强劲
+      moderate: 存在网络效应但强度有限
+      weak: 网络效应不明显或可被替代
+
+  switching_costs:
+    name: 转换成本
+    description: 技术集成深度、合同锁定、行为习惯
+    indicators:
+      - 技术集成复杂度
+      - 合同期限和违约成本
+      - 用户行为习惯强度
+      - 数据迁移难度
+    rating_criteria:
+      strong: 转换成本高，用户留存率>90%
+      moderate: 存在一定转换成本，用户留存率70-90%
+      weak: 转换成本低，用户容易流失
+
+  scale_economies:
+    name: 规模经济
+    description: 规模带来的单位成本优势；最小有效规模
+    indicators:
+      - 单位成本随规模下降幅度
+      - 最小有效规模要求
+      - 固定成本占比
+    rating_criteria:
+      strong: 规模优势明显，成本领先>20%
+      moderate: 存在一定规模优势，成本领先10-20%
+      weak: 规模优势不明显
+
+  intangible_assets:
+    name: 无形资产
+    description: 品牌、专有数据、监管许可、专利
+    indicators:
+      - 品牌认知度和忠诚度
+      - 专利数量和质量
+      - 监管牌照价值
+      - 专有数据资产
+    rating_criteria:
+      strong: 拥有强大的品牌/专利/牌照，难以复制
+      moderate: 存在一定无形资产，但可被替代
+      weak: 无形资产价值有限
+
+# 市场集中度判断标准
+concentration_thresholds:
+  oligopoly:
+    name: 寡头垄断
+    cr3_threshold: 70
+    description: 市场由少数龙头企业主导
+    competition_intensity: 低
+  
+  oligopolistic_competition:
+    name: 寡头竞争
+    cr3_threshold: 50
+    description: 市场存在几家主导企业
+    competition_intensity: 中等
+  
+  competitive:
+    name: 竞争型市场
+    cr5_threshold: 50
+    description: 市场竞争激烈
+    competition_intensity: 高
+  
+  fragmented:
+    name: 分散市场
+    cr10_threshold: 50
+    description: 市场高度分散
+    competition_intensity: 很高
+
+# 行业生命周期判断标准
+lifecycle_stages:
+  introduction:
+    name: 导入期
+    characteristics:
+      - 市场规模小但增长快
+      - 技术不成熟
+      - 竞争者少
+      - 标准未形成
+    investment_implications: 高风险高回报，关注技术领先者
+
+  growth:
+    name: 成长期
+    characteristics:
+      - 市场快速增长
+      - 技术逐渐成熟
+      - 竞争者增多
+      - 行业标准形成
+    investment_implications: 关注市场份额提升者，把握行业整合机遇
+
+  maturity:
+    name: 成熟期
+    characteristics:
+      - 市场增长放缓
+      - 技术成熟
+      - 竞争格局稳定
+      - 行业集中度高
+    investment_implications: 关注龙头企业的分红和现金流
+
+  decline:
+    name: 衰退期
+    characteristics:
+      - 市场规模萎缩
+      - 技术被替代
+      - 竞争者退出
+      - 行业整合
+    investment_implications: 谨慎投资，关注转型机会
