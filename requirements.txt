@@ -1,0 +1,36 @@
+# 股票深度研究报告系统依赖包
+
+# 核心依赖
+pyyaml>=6.0
+pandas>=2.0.0
+numpy>=1.24.0
+
+# 金融数据
+akshare>=1.12.0
+yfinance>=0.2.0
+
+# 数据处理
+openpyxl>=3.1.0
+xlrd>=2.0.0
+
+# 网络请求
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+
+# 浏览器自动化（可选）
+# playwright>=1.40.0
+# cloudscraper>=1.2.0
+
+# PDF处理（可选）
+# pdfplumber>=0.10.0
+# PyPDF2>=3.0.0
+
+# 日志和工具
+colorama>=0.4.6
+tqdm>=4.66.0
+
+# 开发工具（可选）
+# pytest>=7.4.0
+# black>=23.0.0
+# flake8>=6.0.0
